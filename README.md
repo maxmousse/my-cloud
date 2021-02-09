@@ -1,2 +1,3 @@
 # my-cloud
-Self-hosted Nextcloud
+
+This is my self-hosted nextcloud configuration
