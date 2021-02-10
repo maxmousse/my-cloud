@@ -2,24 +2,49 @@ version: '3'
 
 services:
   db:
-    image: postgres:alpine
+    image: postgres:13-alpine
     restart: always
     volumes:
-      - db:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
     env_file:
       - env/db.env
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "10"
+
+  cache:
+    image: redis:6-alpine
+    command: --appendonly yes
+    ports:
+      - "6379"
+    volumes:
+      - cache-data:/data
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "10"
 
   app:
-    image: nextcloud:fpm-alpine
+    image: nextcloud:20-fpm-alpine
     restart: always
     volumes:
-      - nextcloud:/var/www/html
+      - app-data:/var/www/html
     environment:
       - POSTGRES_HOST=db
     env_file:
+      - env/app.env
       - env/db.env
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "10"
     depends_on:
       - db
+      - cache
 
   web:
     build: ./web
@@ -27,10 +52,16 @@ services:
     ports:
       - 8080:80
     volumes:
-      - nextcloud:/var/www/html:ro
+      - app-data:/var/www/html:ro
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "10"
     depends_on:
       - app
 
 volumes:
-  db:
-  nextcloud:
+  db-data:
+  app-data:
+  cache-data:
