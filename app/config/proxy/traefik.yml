@@ -1,18 +1,38 @@
+log:
+  level: DEBUG
 
-# Docker configuration backend
+# Docker configuration
 providers:
   docker: 
     endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false
 
-# API and dashboard configuration
+# Allow dashboard as it will not be exposed to the web
 api:
   insecure: true
 
-# Static configuration
+# Define entrypoints for web
 entryPoints:
   web:
     address: ":80"
-
-  web-secure:
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+    
+  websecure:
     address: ":443"
+    http:
+      tls:
+        certResolver: resolver1
+
+# Certificate resolvers configuration
+certificatesResolvers:
+  resolver1:
+    acme:
+      email: "maxim.darre@gmail.com"
+      storage: "/certificates/acme.json"
+      httpChallenge:
+        entryPoint: web
+ 
