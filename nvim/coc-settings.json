@@ -1,0 +1,11 @@
+{
+  "suggest.autoTrigger": "none",
+  "suggest.maxCompleteItemCount": 40,
+  "coc.preferences.hoverTarget": "preview",
+  "coc.preferences.jumpCommand": "edit",
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "json"],
+  "eslint.filetypes": ["javascript", "typescript"],
+  "diagnostic.errorSign": "•",
+  "diagnostic.warningSign": "•",
+  "diagnostic.infoSign": "•"
+}
