@@ -50,6 +50,7 @@ services:
       - NEXTCLOUD_ADMIN_USER=${NEXTCLOUD_ADMIN_USER}
       - NEXTCLOUD_ADMIN_PASSWORD=${NEXTCLOUD_ADMIN_PASSWORD}
       - NEXTCLOUD_TRUSTED_DOMAINS=${NEXTCLOUD_DOMAIN}
+      - TRUSTED_PROXIES=proxy
       - OVERWRITEPROTOCOL=https
     logging:
       driver: json-file
@@ -72,6 +73,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.web.rule=HOST(`${NEXTCLOUD_DOMAIN}`)
       - traefik.http.routers.web.entrypoints=websecure
+      - traefik.http.routers.web.middlewares=nextcloud,nextcloud_redirect
       - traefik.http.middlewares.nextcloud.headers.stsSeconds=15552001
       - traefik.http.middlewares.nextcloud.headers.stsIncludeSubdomains=true
       - traefik.http.middlewares.nextcloud.headers.stsPreload=true
