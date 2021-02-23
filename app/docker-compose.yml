@@ -52,6 +52,11 @@ services:
       - NEXTCLOUD_TRUSTED_DOMAINS=${NEXTCLOUD_DOMAIN}
       - TRUSTED_PROXIES=proxy
       - OVERWRITEPROTOCOL=https
+      - SMTP_HOST=${NEXTCLOUD_SMTP_HOST}
+      - SMTP_SECURE=${NEXTCLOUD_SMTP_SECURE}
+      - SMTP_NAME=${NEXTCLOUD_SMTP_NAME}
+      - SMTP_PASSWORD=${NEXTCLOUD_SMTP_PASSWORD}
+      - MAIL_FROM_ADDRESS={NEXTCLOUD_MAIL_FROM_ADDRESS}
     logging:
       driver: json-file
       options:
@@ -77,8 +82,8 @@ services:
       - traefik.http.middlewares.nextcloud.headers.stsSeconds=15552001
       - traefik.http.middlewares.nextcloud.headers.stsIncludeSubdomains=true
       - traefik.http.middlewares.nextcloud.headers.stsPreload=true
-      - traefik.http.middlewares.nextcloud_redirect.redirectregex.regex="https://(.*)/.well-known/(card|cal)dav"
-      - traefik.http.middlewares.nextcloud_redirect.redirectregex.replacement="https://$${1}/remote.php/dav/"
+      - traefik.http.middlewares.nextcloud_redirect.redirectregex.regex=/.well-known/(card|cal)dav
+      - traefik.http.middlewares.nextcloud_redirect.redirectregex.replacement=/remote.php/dav/
     logging:
       driver: json-file
       options:
@@ -97,6 +102,7 @@ services:
       - 8080:8080
       - 80:80
       - 443:443
+      - 465:465
     volumes:
       - ./config/proxy/traefik.yml:/etc/traefik/traefik.yml
       - certificates-data:/certificates
