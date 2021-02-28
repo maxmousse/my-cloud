@@ -19,7 +19,7 @@ services:
         max-size: 10m
         max-file: "10"
 
-  # Redis cache (used by nextcloud for lockfiles
+  # Redis cache (used by nextcloud for lockfiles)
   # -------------------------------------------
   cache:
     image: redis:6-alpine
@@ -53,6 +53,7 @@ services:
       - TRUSTED_PROXIES=proxy
       - OVERWRITEPROTOCOL=https
       - SMTP_HOST=${NEXTCLOUD_SMTP_HOST}
+      - SMTP_PORT=${NEXTCLOUD_SMTP_PORT}
       - SMTP_SECURE=${NEXTCLOUD_SMTP_SECURE}
       - SMTP_NAME=${NEXTCLOUD_SMTP_NAME}
       - SMTP_PASSWORD=${NEXTCLOUD_SMTP_PASSWORD}
@@ -102,7 +103,6 @@ services:
       - 8080:8080
       - 80:80
       - 443:443
-      - 465:465
     volumes:
       - ./config/proxy/traefik.yml:/etc/traefik/traefik.yml
       - certificates-data:/certificates
