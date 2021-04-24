@@ -19,7 +19,7 @@ services:
         max-size: 10m
         max-file: "10"
 
-  # Redis cache (used by nextcloud for lockfiles
+  # Redis cache (used by nextcloud for lockfiles)
   # -------------------------------------------
   cache:
     image: redis:6-alpine
