@@ -5,7 +5,7 @@ services:
   # Google dynmic DNS polling solution
   # -------------------------------------------
   ddns:
-    image: cwmr/google-domains-ddns:arm 
+    image: cwmr/google-domains-ddns 
     environment:
       - USERNAME=${GOOGLE_DDNS_USERNAME}
       - PASSWORD=${GOOGLE_DDNS_PASSWORD}
