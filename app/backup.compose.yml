@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+
+  # Backup service
+  # -------------------------------------------
+  backup:
+    image: blacklabelops/volumerize
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "10"
+
