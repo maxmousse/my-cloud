@@ -67,6 +67,18 @@ services:
       - db
       - cache
 
+    # Cron jobs for Nextcloud
+  # -------------------------------------------
+  cron:
+    image: nextcloud:21-fpm-alpine
+    restart: always
+    volumes:
+      - ${DOCKER_VOLUMES_LOCATION}/app:/var/www/html
+    entrypoint: /cron.sh
+    depends_on:
+      - db
+      - cache
+
   # Nginx server for Nextcloud
   # -------------------------------------------
   web:
