@@ -96,21 +96,21 @@ Feature to come...
 
 In the `scripts` folder you will find some bash utility scripts.
 
-### `script/app/up.sh`
+### `scripts/app/up.sh`
 
 This script start the application in detached mode.
 
-### `script/app/down.sh`
+### `scripts/app/down.sh`
 
 This script stop the application in detached mode.
 
-### `script/app/logs.sh`
+### `scripts/app/logs.sh`
 
 This scripts allow to attach to the application logs. The
 name of the container you want to attach to can be passed 
 as parameter.
 
-### `script/compose.sh`
+### `scripts/compose.sh`
 
 This script is a simple shortcut to run `docker-compose` commands
 without having to specify the docker-compose files location. For
