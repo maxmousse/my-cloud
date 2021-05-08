@@ -1,5 +1,3 @@
-log:
-  level: DEBUG
 
 # Docker configuration
 providers:
@@ -35,3 +33,7 @@ certificatesResolvers:
       storage: "/certificates/acme.json"
       httpChallenge:
         entryPoint: web
+
+# Note: uncomment this block if you need more detailed logs
+# log:
+#   level: DEBUG

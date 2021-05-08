@@ -89,3 +89,31 @@ to your router public IP. If this IP is not static, use a dynamic DNS.
 You must also add relevant DNS rules for your SMTP configuration.
 
 ### Backups
+
+Feature to come...
+
+## Scripts
+
+In the `scripts` folder you will find some bash utility scripts.
+
+### `script/app/up.sh`
+
+This script start the application in detached mode.
+
+### `script/app/down.sh`
+
+This script stop the application in detached mode.
+
+### `script/app/logs.sh`
+
+This scripts allow to attach to the application logs. The
+name of the container you want to attach to can be passed 
+as parameter.
+
+### `script/compose.sh`
+
+This script is a simple shortcut to run `docker-compose` commands
+without having to specify the docker-compose files location. For
+example, to start your nextcloud instance, you can run 
+`./scripts/compose.sh up -d`. It can be useful if you want to
+perform custom operations on the docker containers.
