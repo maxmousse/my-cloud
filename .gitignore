@@ -1,0 +1,7 @@
+
+# Ignore private environment configuration
+app/.env
+
+# Ignore default data folder
+data/*
+!data/.gitkeep
