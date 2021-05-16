@@ -124,8 +124,3 @@ services:
       options:
         max-size: 10m
         max-file: "10"
-
-volumes:
-  db-data:
-  cache-data:
-  certificates-data:

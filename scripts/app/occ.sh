@@ -3,13 +3,12 @@
 # -------------------------------------------
 # Note:
 # 
-# This script is a simple shortcut to 
-# start the app
+# This script runs occ command line tool in
+# nextcloud container
 # -------------------------------------------
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cd $DIR/../../app
 
-docker-compose -f app.compose.yml -f dyndns.compose.yml up -d
-
+docker-compose -f app.compose.yml -f dyndns.compose.yml run --rm --user www-data app php occ $@
