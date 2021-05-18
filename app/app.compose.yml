@@ -5,7 +5,7 @@ services:
   # Postgres database service
   # -------------------------------------------
   db:
-    image: postgres:13-alpine
+    image: postgres:13
     restart: always
     volumes:
       - ${DOCKER_VOLUMES_LOCATION}/db:/var/lib/postgresql/data
@@ -22,7 +22,7 @@ services:
   # Redis cache (used by nextcloud for lockfiles)
   # -------------------------------------------
   cache:
-    image: redis:6-alpine
+    image: redis:6
     command: --appendonly yes
     ports:
       - "6379"
@@ -37,7 +37,7 @@ services:
   # Nextcloud fpm application
   # -------------------------------------------
   app:
-    image: nextcloud:21-fpm-alpine
+    image: nextcloud:21-fpm
     restart: always
     volumes:
       - ${DOCKER_VOLUMES_LOCATION}/app:/var/www/html
@@ -70,7 +70,7 @@ services:
     # Cron jobs for Nextcloud
   # -------------------------------------------
   cron:
-    image: nextcloud:21-fpm-alpine
+    image: nextcloud:21-fpm
     restart: always
     volumes:
       - ${DOCKER_VOLUMES_LOCATION}/app:/var/www/html
@@ -82,7 +82,7 @@ services:
   # Nginx server for Nextcloud
   # -------------------------------------------
   web:
-    image: nginx:1-alpine
+    image: nginx:1
     restart: always
     volumes:
       - ./config/web/nginx.conf:/etc/nginx/nginx.conf
