@@ -23,6 +23,7 @@ services:
   # -------------------------------------------
   cache:
     image: redis:6
+    restart: always
     command: --appendonly yes
     ports:
       - "6379"

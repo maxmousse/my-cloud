@@ -6,6 +6,7 @@ services:
   # -------------------------------------------
   ddns:
     image: cwmr/google-domains-ddns 
+    restart: always
     environment:
       - USERNAME=${GOOGLE_DDNS_USERNAME}
       - PASSWORD=${GOOGLE_DDNS_PASSWORD}
