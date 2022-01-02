@@ -38,7 +38,7 @@ services:
   # Nextcloud fpm application
   # -------------------------------------------
   app:
-    image: nextcloud:21-fpm
+    image: nextcloud:22-fpm
     restart: always
     volumes:
       - ${DOCKER_VOLUMES_LOCATION}/app:/var/www/html
@@ -59,6 +59,7 @@ services:
       - SMTP_NAME=${NEXTCLOUD_SMTP_NAME}
       - SMTP_PASSWORD=${NEXTCLOUD_SMTP_PASSWORD}
       - MAIL_FROM_ADDRESS={NEXTCLOUD_MAIL_FROM_ADDRESS}
+      - PHP_MEMORY_LIMIT=1024M
     logging:
       driver: json-file
       options:
@@ -71,8 +72,10 @@ services:
     # Cron jobs for Nextcloud
   # -------------------------------------------
   cron:
-    image: nextcloud:21-fpm
+    image: nextcloud:22-fpm
     restart: always
+    environment:
+      - PHP_MEMORY_LIMIT=1024M
     volumes:
       - ${DOCKER_VOLUMES_LOCATION}/app:/var/www/html
     entrypoint: /cron.sh
@@ -110,7 +113,7 @@ services:
   # Traefick revers proxy: main entrypoint that handle https
   # -------------------------------------------
   proxy:
-    image: traefik:2.4
+    image: traefik:2.5
     restart: always
     ports:
       - 8080:8080

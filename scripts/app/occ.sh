@@ -11,4 +11,4 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cd $DIR/../../app
 
-docker-compose -f app.compose.yml -f dyndns.compose.yml run --rm --user www-data app php occ $@
+docker-compose -f app.compose.yml run --rm --user www-data -e PHP_MEMORY_LIMIT=1024M app php occ $@
